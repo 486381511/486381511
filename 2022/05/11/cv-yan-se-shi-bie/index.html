@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="python基础, 长久">
+    <meta name="keywords" content="cv颜色识别, 长久">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>python基础 | 长久</title>
+    <title>cv颜色识别 | 长久</title>
     <link rel="icon" type="image/png" href="/486381511/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/486381511/libs/awesome/css/all.css">
@@ -264,7 +264,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">python基础</h1>
+                    <h1 class="description center-align post-title">cv颜色识别</h1>
                 </div>
             </div>
         </div>
@@ -290,6 +290,10 @@
                                 <span class="chip bg-color">Python</span>
                             </a>
                         
+                            <a href="/486381511/tags/opencv/">
+                                <span class="chip bg-color">opencv</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -298,8 +302,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/486381511/categories/Python/" class="post-category">
-                                Python
+                            <a href="/486381511/categories/opencv/" class="post-category">
+                                opencv
                             </a>
                         
                     </div>
@@ -311,7 +315,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-05-10
+                    2022-05-11
                 </div>
                 
 
@@ -332,18 +336,22 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Python笔记"><a href="#Python笔记" class="headerlink" title="Python笔记"></a><strong>Python笔记</strong></h1><h2 id="默认都会"><a href="#默认都会" class="headerlink" title="默认都会"></a>默认都会</h2><p><strong>print(“输出”)<br>input(“提示语句”)<br>if(True) : exp1 else: exp2<br>for i in range(): esp1<br>while (True) : exp1</strong></p>
-<hr>
-<h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><p><strong>import time<br>import datetime<br>获取当前时间<br>now_time = datetime.datetime.now()<br>设置一个10秒的对象，具体datetime类看文档<br>date_up = datetime.timedelta(seconds=10)<br>现在的时间加上10，就是10秒后的时间了<br>my_time = now_time+date_up<br>使用循环来控制代码十秒后运行<br>while datetime.datetime.now() &lt; my_time:<br>  time.sleep(1)<br>print(“Hello World!”)</strong></p>
-<hr>
-<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p><strong>文件的打开有两种格式</strong></p>
-<ul>
-<li><p><strong>使用创建对象打开<br>file = open(‘文件路径’,’操作符’)<br>读取该文件内容<br>file.read()<br>写入<br>file.write()<br>关闭<br>file.close()</strong></p>
-</li>
-<li><p><strong>第二种，推荐使用第二种<br>with open(fp,’操作符’) as fp:<br>fp.write()</strong></p>
-<hr>
-</li>
-</ul>
+                <h1 id="颜色识别"><a href="#颜色识别" class="headerlink" title="颜色识别"></a>颜色识别</h1><p><code>找出最大面积的颜色种类，后面按照这个类别进行识别</code></p>
+<h2 id="导入必要库"><a href="#导入必要库" class="headerlink" title="导入必要库"></a>导入必要库</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> datetime</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="加载参数"><a href="#加载参数" class="headerlink" title="加载参数"></a>加载参数</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 加载摄像头</span></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>, cv2.CAP_DSHOW)</span><br><span class="line"><span class="comment"># 用于计算后面红色的总面积</span></span><br><span class="line">max_list = []</span><br><span class="line"><span class="comment"># 用于计算后面蓝色的总面积</span></span><br><span class="line">max1_list = []</span><br><span class="line"><span class="comment"># 用于计算后面绿色的总面积</span></span><br><span class="line">max2_list = []</span><br><span class="line"><span class="comment"># 全局变量的key</span></span><br><span class="line">color_key = <span class="string">""</span></span><br><span class="line"><span class="comment"># 获取当前时间</span></span><br><span class="line">now_time = datetime.datetime.now()</span><br><span class="line"><span class="comment"># 5秒的时间对象</span></span><br><span class="line">date_up = datetime.timedelta(seconds=<span class="number">5</span>)</span><br><span class="line"><span class="comment"># 5秒后的时间</span></span><br><span class="line">my_time = now_time+date_up</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="定义一个找颜色的函数"><a href="#定义一个找颜色的函数" class="headerlink" title="定义一个找颜色的函数"></a>定义一个找颜色的函数</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">MySnow</span>(<span class="params">image, LowColor, UpColor</span>):</span><br><span class="line">    <span class="comment"># 思路</span></span><br><span class="line">    <span class="comment"># 利用二值化找出颜色区域，使用找轮廓函数找出位置，画上</span></span><br><span class="line">    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)</span><br><span class="line">    <span class="comment"># ？？？不知道什么操作得到一个卷积核</span></span><br><span class="line">    line = cv2.getStructuringElement(cv2.MORPH_RECT,(<span class="number">15</span>,<span class="number">15</span>),(-<span class="number">1</span>,-<span class="number">1</span>))</span><br><span class="line">    <span class="comment"># 阈值处理</span></span><br><span class="line">    mask = cv2.inRange(hsv, LowColor, UpColor)</span><br><span class="line">    <span class="comment"># 形态学运算，开运算,先腐蚀后膨胀的过程</span></span><br><span class="line">    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, line)</span><br><span class="line">    <span class="comment"># 找出轮廓</span></span><br><span class="line">    contours,hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line">    <span class="comment"># 索引</span></span><br><span class="line">    index = -<span class="number">1</span></span><br><span class="line">    <span class="built_in">max</span> = <span class="number">0</span></span><br><span class="line">    <span class="comment"># 遍历所有轮廓</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(contours)):</span><br><span class="line">        <span class="comment"># 主要用于计算图像轮廓的面积，找出最大的面积</span></span><br><span class="line">        area = cv2.contourArea(contours[c])</span><br><span class="line">        <span class="comment"># 有面积</span></span><br><span class="line">        <span class="keyword">if</span> area &gt; <span class="built_in">max</span>:</span><br><span class="line">            <span class="comment"># 面积大于max就等于面积</span></span><br><span class="line">            <span class="built_in">max</span> = area</span><br><span class="line">            <span class="comment"># 第几个轮廓</span></span><br><span class="line">            index = c</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> index &gt;= <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># minAreaRect()函数计算并返回指定点集的最小区域边界斜矩形。</span></span><br><span class="line">        rect = cv2.minAreaRect(contours[index])</span><br><span class="line">        <span class="comment"># cv2.ellipse()方法用于在任何图像上绘制椭圆</span></span><br><span class="line">        cv2.ellipse(image, rect, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>, <span class="number">8</span>)</span><br><span class="line">        <span class="comment"># 画小圆</span></span><br><span class="line">        cv2.circle(image, (np.int32(rect[<span class="number">0</span>][<span class="number">0</span>]), np.int32(rect[<span class="number">0</span>][<span class="number">1</span>])), <span class="number">2</span>, (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>, <span class="number">8</span>, <span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 返回每一帧颜色的最大面积</span></span><br><span class="line">    <span class="keyword">return</span> image, <span class="built_in">max</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="定义一个比较总颜色面积大小的函数"><a href="#定义一个比较总颜色面积大小的函数" class="headerlink" title="定义一个比较总颜色面积大小的函数"></a>定义一个比较总颜色面积大小的函数</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">shuBJ</span>(<span class="params">shu, shu1, shu2</span>):</span><br><span class="line">    <span class="keyword">if</span> shu &gt; shu1:</span><br><span class="line">        bigger = shu</span><br><span class="line">        key = <span class="string">"red"</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        bigger = shu1</span><br><span class="line">        key = <span class="string">"blue"</span></span><br><span class="line">    <span class="keyword">if</span> bigger &gt; shu2:</span><br><span class="line">        <span class="keyword">return</span> key</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        key = <span class="string">"green"</span></span><br><span class="line">        <span class="keyword">return</span> key</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="代码第一个主体，按时间算出最大面积的颜色类别"><a href="#代码第一个主体，按时间算出最大面积的颜色类别" class="headerlink" title="代码第一个主体，按时间算出最大面积的颜色类别"></a>代码第一个主体，按时间算出最大面积的颜色类别</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 运行设定好的时间，用于采摘颜色面积的数据</span></span><br><span class="line"><span class="keyword">while</span> datetime.datetime.now() &lt; my_time:</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        <span class="comment"># 调用MySnow函数，得到返回值</span></span><br><span class="line">        <span class="comment"># 里面是红色的阈值</span></span><br><span class="line">        result, <span class="built_in">max</span> = MySnow(frame, (<span class="number">0</span>, <span class="number">43</span>, <span class="number">46</span>), (<span class="number">10</span>, <span class="number">255</span>, <span class="number">255</span>))</span><br><span class="line">        <span class="comment"># 里面是蓝色的阈值</span></span><br><span class="line">        result1, max1 = MySnow(frame, (<span class="number">100</span>, <span class="number">43</span>, <span class="number">46</span>), (<span class="number">124</span>, <span class="number">255</span>, <span class="number">255</span>))</span><br><span class="line">        <span class="comment"># 里面是绿色的阈值</span></span><br><span class="line">        result2, max2 = MySnow(frame, (<span class="number">35</span>, <span class="number">43</span>, <span class="number">46</span>), (<span class="number">77</span>, <span class="number">255</span>, <span class="number">255</span>))</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">max</span>, max1, max2)</span><br><span class="line">        <span class="comment"># 把得到的面积各自添加在自己的列表中</span></span><br><span class="line">        max_list.append(<span class="built_in">max</span>)</span><br><span class="line">        max1_list.append(max1)</span><br><span class="line">        max2_list.append(max2)</span><br><span class="line">        cv2.imshow(<span class="string">'result'</span>, result2)</span><br><span class="line">        c = cv2.waitKey(<span class="number">50</span>)</span><br><span class="line">        <span class="keyword">if</span> c == <span class="number">32</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"><span class="comment"># 把各自的列表中的元素求和加起来，得到总面积</span></span><br><span class="line">max1_shu = <span class="built_in">sum</span>(max_list)</span><br><span class="line">max2_shu = <span class="built_in">sum</span>(max1_list)</span><br><span class="line">max3_shu = <span class="built_in">sum</span>(max2_list)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(max1_shu, max2_shu, max3_shu)</span><br><span class="line"><span class="comment"># 调用shuBJ函数得到关键字，用于记录面积最大的颜色</span></span><br><span class="line">color_key = shuBJ(max1_shu,max2_shu,max3_shu)</span><br><span class="line"><span class="built_in">print</span>(color_key)</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="代码的第二个主体，用于按照得到的key运行代码"><a href="#代码的第二个主体，用于按照得到的key运行代码" class="headerlink" title="代码的第二个主体，用于按照得到的key运行代码"></a>代码的第二个主体，用于按照得到的key运行代码</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 根据前面得到的key运行相对应的代码</span></span><br><span class="line"><span class="keyword">if</span> color_key == <span class="string">"red"</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"red!!!"</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        ret, frame = cap.read()</span><br><span class="line">        <span class="keyword">if</span> ret:</span><br><span class="line">            result, <span class="built_in">max</span> = MySnow(frame, (<span class="number">0</span>, <span class="number">43</span>, <span class="number">46</span>), (<span class="number">10</span>, <span class="number">255</span>, <span class="number">255</span>))</span><br><span class="line">            cv2.imshow(<span class="string">'result'</span>, result)</span><br><span class="line">            c = cv2.waitKey(<span class="number">50</span>)</span><br><span class="line">            <span class="keyword">if</span> c == <span class="number">32</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> color_key == <span class="string">"blue"</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"blue!!!"</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        ret, frame = cap.read()</span><br><span class="line">        <span class="keyword">if</span> ret:</span><br><span class="line">            result, <span class="built_in">max</span> = MySnow(frame, (<span class="number">100</span>, <span class="number">43</span>, <span class="number">46</span>), (<span class="number">124</span>, <span class="number">255</span>, <span class="number">255</span>))</span><br><span class="line">            cv2.imshow(<span class="string">'result'</span>, result)</span><br><span class="line">            c = cv2.waitKey(<span class="number">50</span>)</span><br><span class="line">            <span class="keyword">if</span> c == <span class="number">32</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> color_key == <span class="string">"green"</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"green!!!"</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        ret, frame = cap.read()</span><br><span class="line">        <span class="keyword">if</span> ret:</span><br><span class="line">            result, <span class="built_in">max</span> = MySnow(frame, (<span class="number">35</span>, <span class="number">43</span>, <span class="number">46</span>), (<span class="number">77</span>, <span class="number">255</span>, <span class="number">255</span>))</span><br><span class="line">            cv2.imshow(<span class="string">'result'</span>, result)</span><br><span class="line">            c = cv2.waitKey(<span class="number">50</span>)</span><br><span class="line">            <span class="keyword">if</span> c == <span class="number">32</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line">cap.release()</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>代码还有很大的优化空间，可以自行折腾</strong><br><strong>傻师妹，学会了吗</strong></p>
 
                 
             </div>
@@ -370,7 +378,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://486381511.github.io/486381511/2022/05/10/python/">https://486381511.github.io/486381511/2022/05/10/python/</a>
+                    <a href="https://486381511.github.io/486381511/2022/05/11/cv-yan-se-shi-bie/">https://486381511.github.io/486381511/2022/05/11/cv-yan-se-shi-bie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -410,6 +418,10 @@
                             
                                 <a href="/486381511/tags/Python/">
                                     <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/486381511/tags/opencv/">
+                                    <span class="chip bg-color">opencv</span>
                                 </a>
                             
                         </div>
@@ -576,9 +588,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/486381511/2022/05/11/cv-yan-se-shi-bie/">
                     <div class="card-image">
@@ -595,9 +608,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-11
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-11
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -610,6 +623,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -629,7 +643,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/486381511/2022/05/10/python/">
@@ -662,7 +676,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
