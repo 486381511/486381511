@@ -379,14 +379,15 @@ pyautogui.position()<span aria-hidden="true" class="line-numbers-rows"><span></s
 # 2.指定鼠标按键 button，值分别为'left','middle','right'代表鼠标三个键
 pyautogui.click(1000,1000)
 #不写button，默认就是左键<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>按下与释放鼠标</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">
 # 按住 
 pyautogui.mouseDown(1000,1000)
 time.sleep(2)
 # 放开
-pyautogui.mouseUp(1000,1000)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+pyautogui.mouseUp(1000,1000)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><strong>点击实际上就是封装了这两个方法</strong></p>
 <p>拖动</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">
@@ -405,6 +406,7 @@ pyautogui.scroll(200)<span aria-hidden="true" class="line-numbers-rows"><span></
 # 获取屏幕快照
 im = pyautogui.screenshot()
 # im变量将包含一个屏幕快照的Image对象，可以调用Pillow、cv2方法对该Image对象进行操作<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="分析屏幕截图"><a href="#分析屏幕截图" class="headerlink" title="分析屏幕截图"></a>分析屏幕截图</h3><p><strong>分析像素</strong></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">
 # 如果屏幕上指定的x和y坐标处的像素与指定的颜色匹配
@@ -425,8 +427,7 @@ b = pyautogui.locateOnScreen('.\\学习资源\\猫猫.png')
 # 把该元组传给center函数，返回中心坐标位置
 a = pyautogui.center(b)
 pyautogui.click(a)
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="键盘"><a href="#键盘" class="headerlink" title="键盘"></a>键盘</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">
 # 控制键盘
@@ -439,9 +440,7 @@ print(pyautogui.KEYBOARD_KEYS)
 
 # 按下和释放键盘
 # pyautogui.keyDown()按 和pyautogui.Keyup释放
-# 合并 pyautogui.press()
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+# 合并 pyautogui.press()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>这是一个很有意思的库，上限很高，可以搭配各种花里胡哨的库完成一些特殊的操作，例如qq抢红包等等，甚至可搞游戏外挂</strong></p>
 
