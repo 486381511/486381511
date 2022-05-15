@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="构建简单网络, 长久">
+    <meta name="keywords" content="yolo简单使用, 长久">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>构建简单网络 | 长久</title>
+    <title>yolo简单使用 | 长久</title>
     <link rel="icon" type="image/png" href="/486381511/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/486381511/libs/awesome/css/all.css">
@@ -264,7 +264,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">构建简单网络</h1>
+                    <h1 class="description center-align post-title">yolo简单使用</h1>
                 </div>
             </div>
         </div>
@@ -292,6 +292,10 @@
                         
                             <a href="/486381511/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
                                 <span class="chip bg-color">深度学习</span>
+                            </a>
+                        
+                            <a href="/486381511/tags/yolo/">
+                                <span class="chip bg-color">yolo</span>
                             </a>
                         
                     </div>
@@ -336,88 +340,18 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="深度学习————简单示例"><a href="#深度学习————简单示例" class="headerlink" title="深度学习————简单示例"></a>深度学习————简单示例</h1><h3 id="由数据和结果，推断中间过程，得到一个结果网络可以用于预测和识别物体"><a href="#由数据和结果，推断中间过程，得到一个结果网络可以用于预测和识别物体" class="headerlink" title="由数据和结果，推断中间过程，得到一个结果网络可以用于预测和识别物体"></a>由数据和结果，推断中间过程，得到一个结果网络可以用于预测和识别物体</h3><h3 id="任务：由数据-1-0-2-0-3-0"><a href="#任务：由数据-1-0-2-0-3-0" class="headerlink" title="任务：由数据 1.0 2.0 3.0"></a>任务：由数据 1.0 2.0 3.0</h3><h3 id="结果：4-0-8-0-12-0"><a href="#结果：4-0-8-0-12-0" class="headerlink" title="结果：4.0 8.0 12.0"></a>结果：4.0 8.0 12.0</h3><h3 id="推断中间过程（人眼很简单可以看出关系是乘上4得到结果）"><a href="#推断中间过程（人眼很简单可以看出关系是乘上4得到结果）" class="headerlink" title="推断中间过程（人眼很简单可以看出关系是乘上4得到结果）"></a>推断中间过程（人眼很简单可以看出关系是乘上4得到结果）</h3><h2 id="导入torch"><a href="#导入torch" class="headerlink" title="导入torch"></a>导入torch</h2><p><strong>pytorch是一个基本的深度学习框架，封装好了各种方法</strong></p>
-<pre class=" language-python"><code class="language-python">
-<span class="token keyword">import</span> torch
-</code></pre>
-<h2 id="准备数据和结果"><a href="#准备数据和结果" class="headerlink" title="准备数据和结果"></a>准备数据和结果</h2><pre class=" language-python"><code class="language-python">
-x_data <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-y_data <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">4.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">8.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">12.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-</code></pre>
-<h2 id="构建你的模型"><a href="#构建你的模型" class="headerlink" title="构建你的模型"></a>构建你的模型</h2><pre class=" language-python"><code class="language-python">
-<span class="token comment" spellcheck="true"># 设计模型</span>
-<span class="token keyword">class</span> <span class="token class-name">LinearModel</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># 没有backward，torch.nn.Module 中会自动算来的</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 调用父类构造</span>
-        super<span class="token punctuation">(</span>LinearModel<span class="token punctuation">,</span>self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># 实例化Linear对象，包含了权重w和偏置b，第一个1是输入维数，第二个1是输出维数</span>
-        self<span class="token punctuation">.</span>linear <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
-
-    <span class="token comment" spellcheck="true"># 向前传播</span>
-    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 传入x，自动算 y = wx+b</span>
-        y_pred <span class="token operator">=</span> self<span class="token punctuation">.</span>linear<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> y_pred
-
-<span class="token comment" spellcheck="true"># 创建模型对象</span>
-module <span class="token operator">=</span> LinearModel<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</code></pre>
-<h2 id="构建损失函数和优化器"><a href="#构建损失函数和优化器" class="headerlink" title="构建损失函数和优化器"></a>构建损失函数和优化器</h2><pre class=" language-python"><code class="language-python">
-<span class="token comment" spellcheck="true"># 构造损失函数和优化器</span>
-<span class="token comment" spellcheck="true"># 实例化，损失函数，将来给y'和y就可以算出loss，MSE平方损失函数</span>
-criterion <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>MSELoss<span class="token punctuation">(</span>size_average<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true"># 不乘上1/N</span>
-<span class="token comment" spellcheck="true"># 优化器，优化optim模块里面的一个SGD类，实例化，module.parameters()会检查所有成员，如果这个成员有相应的权重就把这些都加都训练集合上</span>
-<span class="token comment" spellcheck="true"># lr：学习率</span>
-optimizer <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span>module<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>lr<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true"># w=w-lr*(dloss/dw)</span>
-</code></pre>
-<h2 id="训练（向前传播、反向传播和更新权重偏置）"><a href="#训练（向前传播、反向传播和更新权重偏置）" class="headerlink" title="训练（向前传播、反向传播和更新权重偏置）"></a>训练（向前传播、反向传播和更新权重偏置）</h2><pre class=" language-python"><code class="language-python">
-<span class="token comment" spellcheck="true"># 先训练一百次</span>
-<span class="token keyword">for</span> epoch <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># 送入x_data数据集，然后算 y'=wx+b</span>
-    y_pred <span class="token operator">=</span> module<span class="token punctuation">(</span>x_data<span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true"># 计算损失函数</span>
-    loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>y_pred<span class="token punctuation">,</span>y_data<span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true"># 这个loss实例化后会调用__str__()函数</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>epoch<span class="token punctuation">,</span> loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-    <span class="token comment" spellcheck="true"># 所有梯度的权重都归零</span>
-    optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true"># 反向传播</span>
-    loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true"># 更新</span>
-    optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</code></pre>
-<h2 id="训练100次后的权重和偏置"><a href="#训练100次后的权重和偏置" class="headerlink" title="训练100次后的权重和偏置"></a>训练100次后的权重和偏置</h2><pre class=" language-python"><code class="language-python">
-<span class="token keyword">print</span><span class="token punctuation">(</span>module<span class="token punctuation">.</span>Linear<span class="token punctuation">.</span>weight<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>module<span class="token punctuation">.</span>Linear<span class="token punctuation">.</span>bias<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
-
-<span class="token comment" spellcheck="true"># 我的结果是</span>
-<span class="token comment" spellcheck="true"># w 是 tensor([[3.5878]])</span>
-<span class="token comment" spellcheck="true"># b 是 tensor([0.9371])</span>
-<span class="token comment" spellcheck="true"># y = wx + b</span>
-<span class="token comment" spellcheck="true"># 可以看出训练100次后结果不理想，离我们认知的w是4，b是0还是有较大差距</span>
-<span class="token comment" spellcheck="true"># 优化方案：1.更换损失函数</span>
-<span class="token comment" spellcheck="true"># 2.加大次数</span>
-<span class="token comment" spellcheck="true"># ...</span>
-</code></pre>
-<h2 id="最后测试我们从训练中得到的参数是否能够应用于现实（数据集中未曾出现的）"><a href="#最后测试我们从训练中得到的参数是否能够应用于现实（数据集中未曾出现的）" class="headerlink" title="最后测试我们从训练中得到的参数是否能够应用于现实（数据集中未曾出现的）"></a>最后测试我们从训练中得到的参数是否能够应用于现实（数据集中未曾出现的）</h2><pre class=" language-python"><code class="language-python">
-<span class="token comment" spellcheck="true"># 测试</span>
-x_test <span class="token operator">=</span> torch<span class="token punctuation">.</span>Tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1314.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">123.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-y_test <span class="token operator">=</span> module<span class="token punctuation">(</span>x_test<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'y_pred='</span><span class="token punctuation">,</span>y_test<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
-
-<span class="token comment" spellcheck="true"># 最后这里我是采用了训练1000次得到的结果进行验证的</span>
-<span class="token comment" spellcheck="true"># 训练1000次后</span>
-<span class="token comment" spellcheck="true"># 我得到w = 3.9996</span>
-<span class="token comment" spellcheck="true"># b = 0.0008</span>
-<span class="token comment" spellcheck="true"># 离我们认知的结果相差不大</span>
-
-<span class="token comment" spellcheck="true"># 预测</span>
-y_pred<span class="token operator">=</span> tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">5255.5278</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">[</span> <span class="token number">491.9565</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># 可以看出验证结果与事实基本一致</span>
-</code></pre>
+                <h1 id="yolo简单使用（调参侠）"><a href="#yolo简单使用（调参侠）" class="headerlink" title="yolo简单使用（调参侠）"></a>yolo简单使用（调参侠）</h1><h2 id="首先下载好yolo项目文件，安装好各种支持yolo运行的第三方库"><a href="#首先下载好yolo项目文件，安装好各种支持yolo运行的第三方库" class="headerlink" title="首先下载好yolo项目文件，安装好各种支持yolo运行的第三方库"></a>首先下载好yolo项目文件，安装好各种支持yolo运行的第三方库</h2><h1 id="1-调用yolo官方自带已经训练好的模型进行物体检测"><a href="#1-调用yolo官方自带已经训练好的模型进行物体检测" class="headerlink" title="1.调用yolo官方自带已经训练好的模型进行物体检测"></a>1.调用yolo官方自带已经训练好的模型进行物体检测</h1><p><strong>其他先不要动，找到项目中detect.py文件，里面是yolo跑模型的代码，找到方法parse_opt()，这里就是我们要修改的地方，我们要做的只是调参（小白）</strong></p>
+<p><img src="/486381511/medias/yolo/0.png"></p>
+<p><strong>weights是训练好的权重，这里我们要修改的是ROOT /后面引号里的内容，我们可以把训练好的模型放在项目根目录，这里写上训练好的权重文件的文件名就可以了，可以去官方下载官方提供的，这里我使用了我自己训练好名为fish.pt的权重文件</strong></p>
+<p><img src="/486381511/medias/yolo/1.png"></p>
+<p><strong>source是用于检测目标的文件，文件夹里面可以放照片，视频……  例如我的图片就存在’mydata/images/test’里面</strong><br><img src="/486381511/medias/yolo/2.png"></p>
+<p><strong>imgsz不管</strong><br><strong>conf-thres是置信度，一定阈值才在图片上标记，例如这里，当yolo有20%的概率认为这个物体是鱼时，yolo就会标记</strong><br><img src="/486381511/medias/yolo/3.png"></p>
+<p>其他的都是不大影响我们正常输出的，具体可以看yolo官方文档</p>
+<p>完成到这里我们就可以进行目标检测了<br>结果保存在run文件目录下<br><img src="/486381511/medias/yolo/4.png"></p>
+<h1 id="2-训练模型"><a href="#2-训练模型" class="headerlink" title="2.训练模型"></a>2.训练模型</h1><h2 id="首先找到根目录下的train-py文件"><a href="#首先找到根目录下的train-py文件" class="headerlink" title="首先找到根目录下的train.py文件"></a>首先找到根目录下的train.py文件</h2><p><img src="/486381511/medias/yolo/5.png"><br><strong>weights是我们要继承的权重，建议继承官方的，我写过不继承的，一直报错</strong><br><img src="/486381511/medias/yolo/6.png"><br><strong>cfg是模型的结构，其路径在models文件夹下，选择我们需要的模型就行了，模型越复杂需要时间越长</strong><br><img src="/486381511/medias/yolo/7.png"><br><img src="/486381511/medias/yolo/8.png"><br><strong>data是指定配置数据集的文件，我在data文件下魔改了coco数据集的配置文件，生成了mydata配置文件</strong><br><img src="/486381511/medias/yolo/10.png"><br><img src="/486381511/medias/yolo/9.png"><br><strong>下面的参数简单介绍</strong><br><strong>epochs是训练的轮数，训练不一定是越多越好，有可能出现过拟合现象</strong><br><strong>batch-size是一次训练多少张照片</strong><br><strong>resume是断点重连</strong><br><img src="/486381511/medias/yolo/11.png"><br><strong>如果有gpu，device可以填0，没有就填cpu，这个要装GPU版本的pytorch，具体问度娘</strong></p>
+<h1 id="制作数据集"><a href="#制作数据集" class="headerlink" title="制作数据集"></a>制作数据集</h1><h2 id="上面我们写数据集配置文件时，那个路径是我们自己构建的，首先在根目录下随便建立一个文件夹，我的是mydata"><a href="#上面我们写数据集配置文件时，那个路径是我们自己构建的，首先在根目录下随便建立一个文件夹，我的是mydata" class="headerlink" title="上面我们写数据集配置文件时，那个路径是我们自己构建的，首先在根目录下随便建立一个文件夹，我的是mydata"></a>上面我们写数据集配置文件时，那个路径是我们自己构建的，首先在根目录下随便建立一个文件夹，我的是mydata</h2><h2 id="然后在mydata文件夹中，就要建立两个yolo规定的文件夹了，一个是images，一个是labels"><a href="#然后在mydata文件夹中，就要建立两个yolo规定的文件夹了，一个是images，一个是labels" class="headerlink" title="然后在mydata文件夹中，就要建立两个yolo规定的文件夹了，一个是images，一个是labels"></a>然后在mydata文件夹中，就要建立两个yolo规定的文件夹了，一个是images，一个是labels</h2><p><img src="/486381511/medias/yolo/12.png"></p>
+<h2 id="images里面存放你的数据集，也就是图片"><a href="#images里面存放你的数据集，也就是图片" class="headerlink" title="images里面存放你的数据集，也就是图片"></a>images里面存放你的数据集，也就是图片</h2><h2 id="labels存放图片的标签，这里要展开说一下"><a href="#labels存放图片的标签，这里要展开说一下" class="headerlink" title="labels存放图片的标签，这里要展开说一下"></a>labels存放图片的标签，这里要展开说一下</h2><h1 id="如何制作标签"><a href="#如何制作标签" class="headerlink" title="如何制作标签"></a>如何制作标签</h1><h2 id="建议使用https-www-makesense-ai-网站（过墙），在线打标，免费的"><a href="#建议使用https-www-makesense-ai-网站（过墙），在线打标，免费的" class="headerlink" title="建议使用https://www.makesense.ai/网站（过墙），在线打标，免费的"></a>建议使用<a target="_blank" rel="noopener" href="https://www.makesense.ai/%E7%BD%91%E7%AB%99%EF%BC%88%E8%BF%87%E5%A2%99%EF%BC%89%EF%BC%8C%E5%9C%A8%E7%BA%BF%E6%89%93%E6%A0%87%EF%BC%8C%E5%85%8D%E8%B4%B9%E7%9A%84">https://www.makesense.ai/网站（过墙），在线打标，免费的</a></h2><p>网站首页右下角<br><img src="/486381511/medias/yolo/13.png"><br><img src="/486381511/medias/yolo/14.png"><br><img src="/486381511/medias/yolo/15.png"><br><img src="/486381511/medias/yolo/16.png"><br>标记完，就导出<br><img src="/486381511/medias/yolo/17.png"><br><img src="/486381511/medias/yolo/18.png"></p>
+<h2 id="把标签全部移动到mydata下的labels文件夹下"><a href="#把标签全部移动到mydata下的labels文件夹下" class="headerlink" title="把标签全部移动到mydata下的labels文件夹下"></a>把标签全部移动到mydata下的labels文件夹下</h2><h2 id="上面填数据集配置内容时，我们不需要写labels路径的，yolo会检索images文件，然后在同级目录在自动检索labels文件夹的"><a href="#上面填数据集配置内容时，我们不需要写labels路径的，yolo会检索images文件，然后在同级目录在自动检索labels文件夹的" class="headerlink" title="上面填数据集配置内容时，我们不需要写labels路径的，yolo会检索images文件，然后在同级目录在自动检索labels文件夹的"></a>上面填数据集配置内容时，我们不需要写labels路径的，yolo会检索images文件，然后在同级目录在自动检索labels文件夹的</h2><h1 id="完成我们就可以运行train-py文件了，它的结果会生成在runs-x2F-train下面的，我们对应找到best-pt-这个就是最好的权重，然后我们回到上面，在detect-py中换成我们自己训练的权重，然后操作不变，就可以用于检测我们需要的目标"><a href="#完成我们就可以运行train-py文件了，它的结果会生成在runs-x2F-train下面的，我们对应找到best-pt-这个就是最好的权重，然后我们回到上面，在detect-py中换成我们自己训练的权重，然后操作不变，就可以用于检测我们需要的目标" class="headerlink" title="完成我们就可以运行train.py文件了，它的结果会生成在runs/train下面的，我们对应找到best.pt,这个就是最好的权重，然后我们回到上面，在detect.py中换成我们自己训练的权重，然后操作不变，就可以用于检测我们需要的目标"></a>完成我们就可以运行train.py文件了，它的结果会生成在runs/train下面的，我们对应找到best.pt,这个就是最好的权重，然后我们回到上面，在detect.py中换成我们自己训练的权重，然后操作不变，就可以用于检测我们需要的目标</h1><p><strong>更多进阶要学深度学习，自己改接口，用于自己项目</strong></p>
 
                 
             </div>
@@ -444,7 +378,7 @@ y_pred<span class="token operator">=</span> tensor<span class="token punctuation
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://486381511.github.io/486381511/2022/05/15/gou-jian-jian-dan-wang-luo/">https://486381511.github.io/486381511/2022/05/15/gou-jian-jian-dan-wang-luo/</a>
+                    <a href="https://486381511.github.io/486381511/2022/05/15/yolo-jian-dan-shi-yong/">https://486381511.github.io/486381511/2022/05/15/yolo-jian-dan-shi-yong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -488,6 +422,10 @@ y_pred<span class="token operator">=</span> tensor<span class="token punctuation
                             
                                 <a href="/486381511/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
                                     <span class="chip bg-color">深度学习</span>
+                                </a>
+                            
+                                <a href="/486381511/tags/yolo/">
+                                    <span class="chip bg-color">yolo</span>
                                 </a>
                             
                         </div>
@@ -654,9 +592,10 @@ y_pred<span class="token operator">=</span> tensor<span class="token punctuation
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/486381511/2022/05/15/yolo-jian-dan-shi-yong/">
                     <div class="card-image">
@@ -673,9 +612,9 @@ y_pred<span class="token operator">=</span> tensor<span class="token punctuation
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-15
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-15
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -688,6 +627,7 @@ y_pred<span class="token operator">=</span> tensor<span class="token punctuation
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -714,30 +654,30 @@ y_pred<span class="token operator">=</span> tensor<span class="token punctuation
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/486381511/2022/05/11/gui-zi-dong-hua/">
+                <a href="/486381511/2022/05/15/gou-jian-jian-dan-wang-luo/">
                     <div class="card-image">
                         
-                        <img src="/486381511/medias/featureimages/3.jpg" class="responsive-img" alt="GUI自动化">
+                        <img src="/486381511/medias/featureimages/1.jpg" class="responsive-img" alt="构建简单网络">
                         
-                        <span class="card-title">GUI自动化</span>
+                        <span class="card-title">构建简单网络</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            python自动化
+                            深度学习
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-15
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/486381511/categories/Python/" class="post-category">
-                                    Python
+                            <a href="/486381511/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
                                 </a>
                             
                             
@@ -751,8 +691,8 @@ y_pred<span class="token operator">=</span> tensor<span class="token punctuation
                         <span class="chip bg-color">Python</span>
                     </a>
                     
-                    <a href="/486381511/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/">
-                        <span class="chip bg-color">自动化</span>
+                    <a href="/486381511/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
                     </a>
                     
                 </div>

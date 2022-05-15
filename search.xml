@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>yolo简单使用</title>
+      <link href="/486381511/2022/05/15/yolo-jian-dan-shi-yong/"/>
+      <url>/486381511/2022/05/15/yolo-jian-dan-shi-yong/</url>
+      
+        <content type="html"><![CDATA[<h1 id="yolo简单使用（调参侠）"><a href="#yolo简单使用（调参侠）" class="headerlink" title="yolo简单使用（调参侠）"></a>yolo简单使用（调参侠）</h1><h2 id="首先下载好yolo项目文件，安装好各种支持yolo运行的第三方库"><a href="#首先下载好yolo项目文件，安装好各种支持yolo运行的第三方库" class="headerlink" title="首先下载好yolo项目文件，安装好各种支持yolo运行的第三方库"></a>首先下载好yolo项目文件，安装好各种支持yolo运行的第三方库</h2><h1 id="1-调用yolo官方自带已经训练好的模型进行物体检测"><a href="#1-调用yolo官方自带已经训练好的模型进行物体检测" class="headerlink" title="1.调用yolo官方自带已经训练好的模型进行物体检测"></a>1.调用yolo官方自带已经训练好的模型进行物体检测</h1><p><strong>其他先不要动，找到项目中detect.py文件，里面是yolo跑模型的代码，找到方法parse_opt()，这里就是我们要修改的地方，我们要做的只是调参（小白）</strong></p><p><img src="/486381511/medias/yolo/0.png"></p><p><strong>weights是训练好的权重，这里我们要修改的是ROOT /后面引号里的内容，我们可以把训练好的模型放在项目根目录，这里写上训练好的权重文件的文件名就可以了，可以去官方下载官方提供的，这里我使用了我自己训练好名为fish.pt的权重文件</strong></p><p><img src="/486381511/medias/yolo/1.png"></p><p><strong>source是用于检测目标的文件，文件夹里面可以放照片，视频……  例如我的图片就存在’mydata/images/test’里面</strong><br><img src="/486381511/medias/yolo/2.png"></p><p><strong>imgsz不管</strong><br><strong>conf-thres是置信度，一定阈值才在图片上标记，例如这里，当yolo有20%的概率认为这个物体是鱼时，yolo就会标记</strong><br><img src="/486381511/medias/yolo/3.png"></p><p>其他的都是不大影响我们正常输出的，具体可以看yolo官方文档</p><p>完成到这里我们就可以进行目标检测了<br>结果保存在run文件目录下<br><img src="/486381511/medias/yolo/4.png"></p><h1 id="2-训练模型"><a href="#2-训练模型" class="headerlink" title="2.训练模型"></a>2.训练模型</h1><h2 id="首先找到根目录下的train-py文件"><a href="#首先找到根目录下的train-py文件" class="headerlink" title="首先找到根目录下的train.py文件"></a>首先找到根目录下的train.py文件</h2><p><img src="/486381511/medias/yolo/5.png"><br><strong>weights是我们要继承的权重，建议继承官方的，我写过不继承的，一直报错</strong><br><img src="/486381511/medias/yolo/6.png"><br><strong>cfg是模型的结构，其路径在models文件夹下，选择我们需要的模型就行了，模型越复杂需要时间越长</strong><br><img src="/486381511/medias/yolo/7.png"><br><img src="/486381511/medias/yolo/8.png"><br><strong>data是指定配置数据集的文件，我在data文件下魔改了coco数据集的配置文件，生成了mydata配置文件</strong><br><img src="/486381511/medias/yolo/10.png"><br><img src="/486381511/medias/yolo/9.png"><br><strong>下面的参数简单介绍</strong><br><strong>epochs是训练的轮数，训练不一定是越多越好，有可能出现过拟合现象</strong><br><strong>batch-size是一次训练多少张照片</strong><br><strong>resume是断点重连</strong><br><img src="/486381511/medias/yolo/11.png"><br><strong>如果有gpu，device可以填0，没有就填cpu，这个要装GPU版本的pytorch，具体问度娘</strong></p><h1 id="制作数据集"><a href="#制作数据集" class="headerlink" title="制作数据集"></a>制作数据集</h1><h2 id="上面我们写数据集配置文件时，那个路径是我们自己构建的，首先在根目录下随便建立一个文件夹，我的是mydata"><a href="#上面我们写数据集配置文件时，那个路径是我们自己构建的，首先在根目录下随便建立一个文件夹，我的是mydata" class="headerlink" title="上面我们写数据集配置文件时，那个路径是我们自己构建的，首先在根目录下随便建立一个文件夹，我的是mydata"></a>上面我们写数据集配置文件时，那个路径是我们自己构建的，首先在根目录下随便建立一个文件夹，我的是mydata</h2><h2 id="然后在mydata文件夹中，就要建立两个yolo规定的文件夹了，一个是images，一个是labels"><a href="#然后在mydata文件夹中，就要建立两个yolo规定的文件夹了，一个是images，一个是labels" class="headerlink" title="然后在mydata文件夹中，就要建立两个yolo规定的文件夹了，一个是images，一个是labels"></a>然后在mydata文件夹中，就要建立两个yolo规定的文件夹了，一个是images，一个是labels</h2><p><img src="/486381511/medias/yolo/12.png"></p><h2 id="images里面存放你的数据集，也就是图片"><a href="#images里面存放你的数据集，也就是图片" class="headerlink" title="images里面存放你的数据集，也就是图片"></a>images里面存放你的数据集，也就是图片</h2><h2 id="labels存放图片的标签，这里要展开说一下"><a href="#labels存放图片的标签，这里要展开说一下" class="headerlink" title="labels存放图片的标签，这里要展开说一下"></a>labels存放图片的标签，这里要展开说一下</h2><h1 id="如何制作标签"><a href="#如何制作标签" class="headerlink" title="如何制作标签"></a>如何制作标签</h1><h2 id="建议使用https-www-makesense-ai-网站（过墙），在线打标，免费的"><a href="#建议使用https-www-makesense-ai-网站（过墙），在线打标，免费的" class="headerlink" title="建议使用https://www.makesense.ai/网站（过墙），在线打标，免费的"></a>建议使用<a href="https://www.makesense.ai/%E7%BD%91%E7%AB%99%EF%BC%88%E8%BF%87%E5%A2%99%EF%BC%89%EF%BC%8C%E5%9C%A8%E7%BA%BF%E6%89%93%E6%A0%87%EF%BC%8C%E5%85%8D%E8%B4%B9%E7%9A%84">https://www.makesense.ai/网站（过墙），在线打标，免费的</a></h2><p>网站首页右下角<br><img src="/486381511/medias/yolo/13.png"><br><img src="/486381511/medias/yolo/14.png"><br><img src="/486381511/medias/yolo/15.png"><br><img src="/486381511/medias/yolo/16.png"><br>标记完，就导出<br><img src="/486381511/medias/yolo/17.png"><br><img src="/486381511/medias/yolo/18.png"></p><h2 id="把标签全部移动到mydata下的labels文件夹下"><a href="#把标签全部移动到mydata下的labels文件夹下" class="headerlink" title="把标签全部移动到mydata下的labels文件夹下"></a>把标签全部移动到mydata下的labels文件夹下</h2><h2 id="上面填数据集配置内容时，我们不需要写labels路径的，yolo会检索images文件，然后在同级目录在自动检索labels文件夹的"><a href="#上面填数据集配置内容时，我们不需要写labels路径的，yolo会检索images文件，然后在同级目录在自动检索labels文件夹的" class="headerlink" title="上面填数据集配置内容时，我们不需要写labels路径的，yolo会检索images文件，然后在同级目录在自动检索labels文件夹的"></a>上面填数据集配置内容时，我们不需要写labels路径的，yolo会检索images文件，然后在同级目录在自动检索labels文件夹的</h2><h1 id="完成我们就可以运行train-py文件了，它的结果会生成在runs-x2F-train下面的，我们对应找到best-pt-这个就是最好的权重，然后我们回到上面，在detect-py中换成我们自己训练的权重，然后操作不变，就可以用于检测我们需要的目标"><a href="#完成我们就可以运行train-py文件了，它的结果会生成在runs-x2F-train下面的，我们对应找到best-pt-这个就是最好的权重，然后我们回到上面，在detect-py中换成我们自己训练的权重，然后操作不变，就可以用于检测我们需要的目标" class="headerlink" title="完成我们就可以运行train.py文件了，它的结果会生成在runs/train下面的，我们对应找到best.pt,这个就是最好的权重，然后我们回到上面，在detect.py中换成我们自己训练的权重，然后操作不变，就可以用于检测我们需要的目标"></a>完成我们就可以运行train.py文件了，它的结果会生成在runs/train下面的，我们对应找到best.pt,这个就是最好的权重，然后我们回到上面，在detect.py中换成我们自己训练的权重，然后操作不变，就可以用于检测我们需要的目标</h1><p><strong>更多进阶要学深度学习，自己改接口，用于自己项目</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 深度学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> 深度学习 </tag>
+            
+            <tag> yolo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>构建简单网络</title>
       <link href="/486381511/2022/05/15/gou-jian-jian-dan-wang-luo/"/>
       <url>/486381511/2022/05/15/gou-jian-jian-dan-wang-luo/</url>
