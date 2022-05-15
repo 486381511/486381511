@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>百度直连(免流)</title>
+      <link href="/486381511/2022/05/15/bai-du-zhi-lian-mian-liu/"/>
+      <url>/486381511/2022/05/15/bai-du-zhi-lian-mian-liu/</url>
+      
+        <content type="html"><![CDATA[<h2 id="ml（定向转通用，自由奔放）"><a href="#ml（定向转通用，自由奔放）" class="headerlink" title="ml（定向转通用，自由奔放）"></a>ml（定向转通用，自由奔放）</h2><h3 id="首先你需要的条件："><a href="#首先你需要的条件：" class="headerlink" title="首先你需要的条件："></a>首先你需要的条件：</h3><h3 id="1-已root的安卓手机一台"><a href="#1-已root的安卓手机一台" class="headerlink" title="1.已root的安卓手机一台"></a>1.已root的安卓手机一台</h3><h3 id="2-刷如Magisk"><a href="#2-刷如Magisk" class="headerlink" title="2.刷如Magisk"></a>2.刷如Magisk</h3><h3 id="3-定向流量多的一张卡，最好百度定向"><a href="#3-定向流量多的一张卡，最好百度定向" class="headerlink" title="3.定向流量多的一张卡，最好百度定向"></a>3.定向流量多的一张卡，最好百度定向</h3><p><strong>magisk刷入百度直连</strong><br><img src="/486381511/medias/bdzl/0.jpg"><br><img src="/486381511/medias/bdzl/1.jpg"><br><img src="/486381511/medias/bdzl/2.jpg"></p><p><strong>mt管理器里面设置好配置</strong><br><strong>路径是根目录下data/百度直连/</strong><br><img src="/486381511/medias/bdzl/3.jpg"><br><strong>设置UA伪装，就这两个位置</strong><br><img src="/486381511/medias/bdzl/4.jpg"><br><strong>保存，运行</strong><br><img src="/486381511/medias/bdzl/5.jpg"><br><strong>效果</strong><br><img src="/486381511/medias/bdzl/6.jpg"><br><img src="/486381511/medias/bdzl/7.png"><br><strong>可以自由奔放了，唯一缺点就是不能再开别的代理，手机无法出国，打游戏就去配置里面放行该游戏就行了</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> ml </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ml </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>yolo简单使用</title>
       <link href="/486381511/2022/05/15/yolo-jian-dan-shi-yong/"/>
       <url>/486381511/2022/05/15/yolo-jian-dan-shi-yong/</url>
